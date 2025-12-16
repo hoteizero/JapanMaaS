@@ -1,0 +1,28 @@
+name: ODPT Data Sync
+
+on:
+  schedule:
+    - cron: '0 3 * * *'  # 毎日12:00 JST（3:00 UTC）
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          pip install duckdb requests psycopg2-binary
+
+      - name: Run sync script
+        env:
+          ODPT_API_KEY: ${{ secrets.ODPT_API_KEY }}
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}  # postgres://... 形式
+        run: |
+          python your_script.py all
