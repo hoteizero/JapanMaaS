@@ -2,7 +2,7 @@ name: ODPT Data Sync
 
 on:
   schedule:
-    - cron: '0 3 * * *'  # 毎日12:00 JST（3:00 UTC）
+    - cron: '0 3 * * *'  # 毎日12:00 JST
   workflow_dispatch:
 
 jobs:
@@ -23,6 +23,6 @@ jobs:
       - name: Run sync script
         env:
           ODPT_API_KEY: ${{ secrets.ODPT_API_KEY }}
-          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}  # postgres://... 形式
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
         run: |
-          python your_script.py all
+          python odpt_sync.py all   # ← ここを実際のファイル名に！
