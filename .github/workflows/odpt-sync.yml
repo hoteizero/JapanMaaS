@@ -25,4 +25,4 @@ jobs:
           ODPT_API_KEY: ${{ secrets.ODPT_API_KEY }}
           SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
         run: |
-          python odpt_sync.py all   # ← ここを実際のファイル名に！
+          python JapanMaaS_sync.py all   # ← ここを実際のファイル名に！
